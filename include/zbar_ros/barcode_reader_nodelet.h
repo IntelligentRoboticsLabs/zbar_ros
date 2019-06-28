@@ -63,8 +63,8 @@ namespace zbar_ros
     boost::unordered_map<std::string, ros::Time> barcode_memory_;
 
     double throttle_;
+    std::string camera_topic_;
   };
-
 }  // namespace zbar_ros
 
 #endif  // ZBAR_ROS_ZBAR_ROS_NODELET_H

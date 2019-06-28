@@ -49,8 +49,10 @@ namespace zbar_ros
     barcode_pub_ = nh_.advertise<std_msgs::String>("barcode", 10,
         boost::bind(&BarcodeReaderNodelet::connectCb, this),
         boost::bind(&BarcodeReaderNodelet::disconnectCb, this));
-    
+
     private_nh_.param<double>("throttle_repeated_barcodes", throttle_, 0.0);
+    private_nh_.param<std::string>("camera_topic", camera_topic_, "image");
+
     if (throttle_ > 0.0){
       clean_timer_ = nh_.createTimer(ros::Duration(10.0), boost::bind(&BarcodeReaderNodelet::cleanCb, this));
     }
@@ -61,7 +63,7 @@ namespace zbar_ros
     if (!camera_sub_ && barcode_pub_.getNumSubscribers() > 0)
     {
       NODELET_INFO("Connecting to camera topic.");
-      camera_sub_ = nh_.subscribe("image", 10, &BarcodeReaderNodelet::imageCb, this);
+      camera_sub_ = nh_.subscribe(camera_topic_, 10, &BarcodeReaderNodelet::imageCb, this);
     }
   }
 
