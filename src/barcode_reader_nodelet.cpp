@@ -72,7 +72,7 @@ namespace zbar_ros
     if (barcode_pub_.getNumSubscribers() == 0)
     {
       NODELET_INFO("Unsubscribing from camera topic.");
-      camera_sub_.shutdown();
+      //camera_sub_.shutdown();
     }
   }
 
